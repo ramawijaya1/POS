@@ -13,7 +13,7 @@
       $queryuser = mysqli_query($conn,"SELECT * FROM login WHERE username='$user'");
       $cariuser = mysqli_fetch_assoc($queryuser);
           
-          if( password_verify($pass, $cariuser['password']) ) {
+          if ($pass === $cariuser['password']) {
               $_SESSION['userid'] = $cariuser['userid'];
               $_SESSION['username'] = $cariuser['username'];
               $_SESSION['log'] = "login";
