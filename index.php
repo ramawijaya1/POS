@@ -1,6 +1,6 @@
 
 <?php include 'sidebar.php'; ?>
-<?php $dataselect = mysqli_query($conn, "SELECT * FROM produk");
+<?php $dataselect = mysqli_query($conn, "SELECT * FROM inventory");
 $jsArray = "var nama_produk = new Array();";
 $jsArray1 = "var harga_jual = new Array();";
 $jsArray2 = "var harga_modal = new Array();";  
@@ -116,7 +116,7 @@ if(isset($_POST['InputCart']))
     }
 }
 };
-$DataInv = mysqli_fetch_array(mysqli_query($conn,"SELECT * FROM cart LIMIT 1"));
+$DataInv = mysqli_fetch_array(mysqli_query($conn,"SELECT * FROM kasir LIMIT 1"));
 $noinv = $DataInv['invoice'];
 ?>
 <div class="bg-purple p-2 text-white" style="border-radius:0.25rem;">

@@ -7,13 +7,13 @@ session_start();
   function ribuan ($nilai){
     return number_format ($nilai, 0, ',', '.');
 }
-$uid = $_SESSION['userid'];
-$DataLogin = mysqli_fetch_array(mysqli_query($conn,"SELECT * FROM login WHERE userid='$uid'"));
+$uid = $_SESSION['id_kasir'];
+$DataLogin = mysqli_fetch_array(mysqli_query($conn,"SELECT * FROM kasir WHERE id_kasir='$uid'"));
 $username = $DataLogin['username'];
-$toko = $DataLogin['toko'];
-$alamat = $DataLogin['alamat'];
+$nama = $DataLogin['nama_kasir'];
+$alamat = $DataLogin['alamat_kasir'];
+$JenisKelamin = $DataLogin['jenis_kelamin'];
 $telepon = $DataLogin['telepon'];
-$logo = $DataLogin['logo'];
 ?>
 <!DOCTYPE html>
 <html>
@@ -45,8 +45,8 @@ $logo = $DataLogin['logo'];
         </div>
       </div>
       <div class="sidebar-header">
-        <div class="user-pic" style="height:70px;width:70px;">
-          <img class="img-responsive img-rounded" src="assets/images/<?php echo $logo ?>"
+        <div class="user-pic" style="height:50%;width:50%;">
+          <img class="img-responsive img-rounded" src="assets/images/firda.png"
             alt="User picture">
         </div>
         <div class="user-info">
@@ -102,7 +102,7 @@ $logo = $DataLogin['logo'];
     </div>
     <div class="sidebar-footer">
     © 2022 Developed by - <a target="_blank" rel="noopener noreferrer" href="https://adgrafika.my.id">
-     Adgrafika</a>
+     Kelompok 5</a>
     </div>
   </nav>
   <!-- sidebar-wrapper  -->

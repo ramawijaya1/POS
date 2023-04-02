@@ -2,15 +2,15 @@
 	@ob_start();
 	session_start();
   include 'config.php';
-	if(!isset($_SESSION['log'])){
-    } else {
-        header('location:index.php');
-    };
+	// if(!isset($_SESSION['log'])){
+  //   } else {
+  //       header('location:index.php');
+  //   };
 
     if(isset($_POST['login'])){
       $user = mysqli_real_escape_string($conn,$_POST['username']);
       $pass = mysqli_real_escape_string($conn,$_POST['password']);
-      $queryuser = mysqli_query($conn,"SELECT * FROM login WHERE username='$user'");
+      $queryuser = mysqli_query($conn,"SELECT * FROM kasir WHERE username='$user'");
       $cariuser = mysqli_fetch_assoc($queryuser);
           
           if ($pass === $cariuser['password']) {
@@ -53,7 +53,7 @@ body {
   align-items: center;
   padding-top: 40px;
   padding-bottom: 40px;
-  background: #4c6ef8;
+  background-image: url("assets/images/green-slate.jpg");
 }
 
 .form-signin {
@@ -90,7 +90,7 @@ body {
 <body class="text-center">
 
     <form class="form-signin" method="POST">
-      <img class="mb-4" src="assets/images/logo-adgrafika.png" alt="" width="72" height="72">
+      <img class="mb-4" src="assets/images/firda.png" alt="" width="150" height="72">
       <div class="form-group mb-2">
         <label for="inputuser" class="sr-only">Username</label>
         <input type="text" id="inputuser" name="username" class="form-control" placeholder="Username" required autofocus>
@@ -100,8 +100,8 @@ body {
         <input type="password" id="inputPassword" name="password" class="form-control" placeholder="Password" required>
       </div>
       <button class="btn btn-warning btn-block" name="login" style="font-weight:700;" type="submit">Sign in</button>
-      <p class="mt-3 mb-3 text-white">&copy; 2022 Developed by - <a target="_blank" rel="noopener noreferrer" href="https://adgrafika.my.id" class="text-white">
-     Adgrafika</a></p>
+      <p class="mt-3 mb-3 text-white">&copy; 2023 Developed by - <a target="_blank" rel="noopener noreferrer" href="https://adgrafika.my.id" class="text-white">
+     Kelompok 5</a></p>
     </form>
 
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
