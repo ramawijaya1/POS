@@ -7,7 +7,7 @@ if(!empty($_GET['detail'])){
 } else {
 echo '<script>history.go(-1);</script>';
 }; 
-$DataInv = mysqli_fetch_array(mysqli_query($conn,"SELECT * FROM inv WHERE invoice='$noinv'"));
+$DataInv = mysqli_fetch_array(mysqli_query($conn,"SELECT * FROM invoice WHERE invoice='$noinv'"));
 $Dbayar = $DataInv['pembayaran'];
 $Dkembali = $DataInv['kembalian'];
 $Datee = $DataInv['tgl_inv'];
