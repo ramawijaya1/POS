@@ -22,7 +22,7 @@ $jsArray2 = "var harga_modal = new Array();";
             $jsArray2 .= "harga_modal['" . $row_brg['kode_produk'] . "'] = {harga_modal:'" . addslashes($row_brg['harga_modal']) . "'};"; } ?>
         <?php } ?>
     </datalist>
-    <span class="position-absolute icon-qr"><i class="fas fa-qrcode text-muted"></i></span>
+    <span class="position-absolute icon-qr" >ID </span>
     </div>
   </div>
   <div class="col-sm-4 col-md-4 col-lg-3 mb-3">
