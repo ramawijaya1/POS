@@ -61,14 +61,14 @@ if(isset($_POST['InputCart']))
     $Input5 = htmlspecialchars($_POST['Csubs']);
     $hrg_m = htmlspecialchars($_POST['harga_modal']);
 
-    $cekDulu = mysqli_query($conn,"SELECT * FROM cart ");
+    $cekDulu = mysqli_query($conn,"SELECT * FROM penjualan ");
     $liat = mysqli_num_rows($cekDulu);
     $f = mysqli_fetch_array($cekDulu);
     $inv_c = $f['invoice'];
     $ii = htmlspecialchars($_POST['Cqty']);
 
     if($liat>0){
-      $cekbrg = mysqli_query($conn,"SELECT * FROM cart WHERE kode_produk='$Input1' and invoice='$inv_c'");
+      $cekbrg = mysqli_query($conn,"SELECT * FROM penjualan WHERE kode_produk='$Input1' and invoice='$inv_c'");
       $liatlg = mysqli_num_rows($cekbrg);
       $brpbanyak = mysqli_fetch_array($cekbrg);
       $jmlh = $brpbanyak['qty'];
@@ -79,14 +79,14 @@ if(isset($_POST['InputCart']))
         $baru = $jmlh + $i;
         $baru1 = $jmlh1 * $baru;
 
-        $updateaja = mysqli_query($conn,"UPDATE cart SET qty='$baru', subtotal='$baru1' WHERE invoice='$inv_c' and kode_produk='$Input1'");
+        $updateaja = mysqli_query($conn,"UPDATE penjualan SET qty='$baru', subtotal='$baru1' WHERE invoice='$inv_c' and kode_produk='$Input1'");
         if($updateaja){
            echo '<script>window.location="index.php"</script>';
         } else {
            echo '<script>window.location="index.php"</script>';
         }
       } else {
-      $tambahdata = mysqli_query($conn,"INSERT INTO cart (invoice,kode_produk,nama_produk,harga,harga_modal,qty,subtotal)
+      $tambahdata = mysqli_query($conn,"INSERT INTO penjualan (invoice,kode_produk,nama_produk,harga,harga_modal,qty,subtotal)
        values('$inv_c','$Input1','$Input2','$Input3','$hrg_m','$ii','$Input5')");
       if ($tambahdata){
           echo '<script>window.location="index.php"</script>';
@@ -95,7 +95,7 @@ if(isset($_POST['InputCart']))
       };
 } else {
   
-  $queryStar = mysqli_query($conn, "SELECT max(invoice) as kodeTerbesar FROM inv");
+  $queryStar = mysqli_query($conn, "SELECT max(invoice) as kodeTerbesar FROM invoice");
   $data = mysqli_fetch_array($queryStar);
   $kodeInfo = $data['kodeTerbesar'];
   $urutan = (int) substr($kodeInfo, 8, 2);
@@ -103,9 +103,9 @@ if(isset($_POST['InputCart']))
   $huruf = "AD";
   $oi = $huruf . date("jnyGi") . sprintf("%02s", $urutan);
     
-    $bikincart = mysqli_query($conn,"INSERT INTO inv (invoice,pembayaran,kembalian,status) values('$oi','','','proses')");
+    $bikincart = mysqli_query($conn,"INSERT INTO invoice (invoice,pembayaran,kembalian,status) values('$oi','','','proses')");
     if($bikincart){
-      $tambahuser = mysqli_query($conn,"INSERT INTO cart (invoice,kode_produk,nama_produk,harga,harga_modal,qty,subtotal)
+      $tambahuser = mysqli_query($conn,"INSERT INTO penjualan (invoice,kode_produk,nama_produk,harga,harga_modal,qty,subtotal)
       values('$oi','$Input1','$Input2','$Input3','$hrg_m','$ii','$Input5')");
       if ($tambahuser){
         echo '<script>window.location="index.php"</script>';
@@ -116,7 +116,7 @@ if(isset($_POST['InputCart']))
     }
 }
 };
-$DataInv = mysqli_fetch_array(mysqli_query($conn,"SELECT * FROM kasir LIMIT 1"));
+$DataInv = mysqli_fetch_array(mysqli_query($conn,"SELECT * FROM penjualan LIMIT 1"));
 $noinv = $DataInv['invoice'];
 ?>
 <div class="bg-purple p-2 text-white" style="border-radius:0.25rem;">
@@ -138,7 +138,7 @@ $noinv = $DataInv['invoice'];
 <?php 
 $no = 1;
 $tot_bayar = 0;
-$data_cart = mysqli_query($conn,"SELECT * FROM cart");
+$data_cart = mysqli_query($conn,"SELECT * FROM penjualan");
 while($d = mysqli_fetch_array($data_cart)){
     ?>
   <tr>
@@ -158,7 +158,7 @@ while($d = mysqli_fetch_array($data_cart)){
 <?php 
 if(!empty($_GET['hapus'])){
   $idcart = $_GET['hapus'];
-  $hapus_data_Cart = mysqli_query($conn, "DELETE FROM cart WHERE idcart='$idcart'");
+  $hapus_data_Cart = mysqli_query($conn, "DELETE FROM penjualan WHERE idcart='$idcart'");
       if($hapus_data_Cart){
           echo '<script>history.go(-1);</script>';
       } else {
@@ -167,15 +167,15 @@ if(!empty($_GET['hapus'])){
 };
 if(!empty($_GET['hapusAll'])){
   $noinvoicenya = $_GET['hapusAll'];
-  $hapus_data_Cart_all = mysqli_query($conn, "DELETE FROM cart WHERE invoice='$noinvoicenya'");
-  $hapus_data_Cart_all1 = mysqli_query($conn, "DELETE FROM inv WHERE invoice='$noinvoicenya'");
+  $hapus_data_Cart_all = mysqli_query($conn, "DELETE FROM penjualan WHERE invoice='$noinvoicenya'");
+  $hapus_data_Cart_all1 = mysqli_query($conn, "DELETE FROM invoice WHERE invoice='$noinvoicenya'");
       if($hapus_data_Cart_all&&$hapus_data_Cart_all1){
           echo '<script>history.go(-1);</script>';
       } else {
           echo '<script>alert("Gagal Hapus Data keranjang");history.go(-1);</script>';
       }
 };
-    $itungtrans = mysqli_query($conn,"SELECT SUM(subtotal) as jumlahtrans FROM cart");
+    $itungtrans = mysqli_query($conn,"SELECT SUM(subtotal) as jumlahtrans FROM penjualan");
 	  $itungtrans2 = mysqli_fetch_assoc($itungtrans);
 	  $itungtrans3 = $itungtrans2['jumlahtrans'];
   ?>
@@ -198,14 +198,14 @@ if(!empty($_GET['hapusAll'])){
         <div class="col-sm-12 text-right">
       <div class="d-block d-sm-block d-md-none d-lg-none py-1"></div>
        <?php 
-       $on = mysqli_query($conn,"SELECT * FROM cart");
+       $on = mysqli_query($conn,"SELECT * FROM penjualan");
        $x1 = mysqli_num_rows($on);
        if($x1>0){
         ?>
         <a href="?hapusAll=<?php echo $noinv ?>" onclick="javascript:return confirm('Anda yakin ingin menghapus semua data keranjang ?');"
        class="btn btn-danger btn-sm px-3 mr-2"><i class="fa fa-trash-alt mr-1"></i>Hapus Semua</a>
         <button type="submit" name="import" class="btn btn-primary btn-sm px-3">
-        <i class="fa fa-check mr-1"></i>Simpan</button>
+        <i class="fa fa-check mr-1" href='index.php'></i>Simpan</button>
        <?php } else { ?>
           <button class="btn btn-danger btn-sm px-3 mr-2" disabled>
           <i class="fa fa-trash-alt mr-1"></i>Hapus Semua</button>
@@ -235,14 +235,14 @@ if(isset($_POST['import']))
     $Ipembayaran = htmlspecialchars($_POST['pembayaran']);
     $Ikembalian = htmlspecialchars($_POST['kembalian']);
 
-    $UpdCart = mysqli_query($conn,"UPDATE inv SET
+    $UpdCart = mysqli_query($conn,"UPDATE invoice SET
       pembayaran='$Ipembayaran',kembalian='$Ikembalian',status='selesai' WHERE invoice='$noinv'") 
      or die (mysqli_connect_error()); 
 
      $UpdLap = mysqli_query($conn, "INSERT INTO laporan (invoice,kode_produk,nama_produk,harga,harga_modal,qty,subtotal)
-     SELECT invoice,kode_produk,nama_produk,harga,harga_modal,qty,subtotal FROM cart") or die (mysqli_connect_error());
+     SELECT invoice,kode_produk,nama_produk,harga,harga_modal,qty,subtotal FROM penjualan") or die (mysqli_connect_error());
 
-    $DelCart = mysqli_query($conn,"DELETE FROM cart") or die (mysqli_connect_error());
+    $DelCart = mysqli_query($conn,"DELETE FROM penjualan") or die (mysqli_connect_error());
     
     if($UpdCart&&$UpdLap&&$DelCart){
         echo '<script>window.location="invoice.php?detail='.$noinv.'"</script>';

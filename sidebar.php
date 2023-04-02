@@ -7,13 +7,13 @@ session_start();
   function ribuan ($nilai){
     return number_format ($nilai, 0, ',', '.');
 }
-$uid = $_SESSION['id_kasir'];
-$DataLogin = mysqli_fetch_array(mysqli_query($conn,"SELECT * FROM kasir WHERE id_kasir='$uid'"));
+$uid = $_SESSION['userid'];
+$DataLogin = mysqli_fetch_array(mysqli_query($conn,"SELECT * FROM kasir WHERE userid='$uid'"));
 $username = $DataLogin['username'];
-$nama = $DataLogin['nama_kasir'];
-$alamat = $DataLogin['alamat_kasir'];
-$JenisKelamin = $DataLogin['jenis_kelamin'];
+$toko = $DataLogin['toko'];
+$alamat = $DataLogin['alamat'];
 $telepon = $DataLogin['telepon'];
+$logo = $DataLogin['logo'];
 ?>
 <!DOCTYPE html>
 <html>

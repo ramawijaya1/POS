@@ -56,7 +56,7 @@ $i4 = mysqli_fetch_assoc(mysqli_query($conn,"SELECT SUM(subtotal) as isub FROM l
 <tbody>
 <?php 
     $no = 1;
-    $data_laporan = mysqli_query($conn,"SELECT * FROM inv WHERE status='selesai' ORDER BY invid ASC");
+    $data_laporan = mysqli_query($conn,"SELECT * FROM invoice WHERE status='selesai' ORDER BY invid ASC");
     while($d = mysqli_fetch_array($data_laporan)){
       $oninv = $d['invoice'];
         ?>

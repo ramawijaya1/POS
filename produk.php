@@ -21,7 +21,7 @@
 <tbody>
 <?php 
     $no = 1;
-    $data_barang = mysqli_query($conn,"SELECT * FROM produk ORDER BY idproduk ASC");
+    $data_barang = mysqli_query($conn,"SELECT * FROM inventory ORDER BY idproduk ASC");
     while($d = mysqli_fetch_array($data_barang)){
         ?>
   <tr>
