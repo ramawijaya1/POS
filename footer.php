@@ -27,7 +27,7 @@
     <script src="assets/vendor/datatables/responsive.bootstrap4.min.js"></script>
     <script type="text/javascript">
         $(document).ready(function() {
-            $('#table').DataTable();
+            $('#table').dataTable({searching: true, paging: true, info: true,language:{"info":"Page _PAGE_ of _PAGES_"}});
         } );
         $('#cart').dataTable({searching: false, paging: false, info: false});
     </script>

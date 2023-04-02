@@ -3,7 +3,7 @@
 <!-- isinya -->
     <h1 class="h3 mb-0">
         Data Produk
-        <button class="btn btn-primary btn-sm border-0 float-right" type="button" data-toggle="modal" data-target="#TambahProduk">Tambah Produk</button>
+        <button class="btn btn-primary btn-sm border-0 float-right" onclick="document.getElementById('tmbhprdk').reset(); " type="button" data-toggle="modal" data-target="#TambahProduk">Tambah Produk</button>
     </h1>
 <hr>
 <table class="table table-striped table-sm table-bordered dt-responsive nowrap" id="table" width="100%">
@@ -147,7 +147,7 @@ if(isset($_POST['SimpanEdit'])){
 <div class="modal fade" id="TambahProduk" tabindex="-1" role="dialog">
   <div class="modal-dialog" role="document">
     <div class="modal-content border-0">
-    <form method="post">
+    <form method="post" id="tmbhprdk">
       <div class="modal-header bg-purple">
         <h5 class="modal-title text-white">Tambah Produk</h5>
         <button type="button" class="close text-white" data-dismiss="modal" aria-label="Close">
@@ -174,7 +174,7 @@ if(isset($_POST['SimpanEdit'])){
       </div>
       <div class="modal-footer">
         <button type="button" class="btn btn-secondary" data-dismiss="modal">Batal</button>
-        <button type="submit" onclick="location.reload()" name="TambahProduk" class="btn btn-primary">Simpan</button>
+        <button type="submit"  name="TambahProduk" class="btn btn-primary">Simpan </button>
         
       </div>
     </form>
