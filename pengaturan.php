@@ -59,7 +59,7 @@ if(isset($_POST['UpdatePass'])){
 ?>
     <h1 class="h3 mb-2">Account Settings</h1>
         <!-- Profile widget -->
-        <div class="bg-white shadow rounded overflow-hidden">
+        <!-- <div class="bg-white shadow rounded overflow-hidden">
             <div class="px-4 bg-purple" style="border-radius:0.25rem;">
                 <div class="media align-items-end profile-header">
                     <form method="POST" action="proses-logo.php" enctype="multipart/form-data">
@@ -155,7 +155,7 @@ if(isset($_POST['UpdatePass'])){
                         </div>
                         
                         </form>
-                    </div>
+                    </div> -->
 
                 </div><!-- End tab -->
             </div>
