@@ -12,7 +12,7 @@
     <th>No</th>
     <th>Kode Produk</th>
     <th>Nama Produk</th>
-    <th>Harga Modal</th>
+    <th>Stok</th>
     <th>Harga Jual</th>
     <th>Tgl Input</th>
     <th>Opsi</th>
@@ -28,7 +28,7 @@
     <td><?php echo $no++; ?></td>
     <td><?php echo $d['kode_produk']; ?></td>
     <td><?php echo $d['nama_produk']; ?></td>
-    <td>Rp.<?php echo ribuan($d['harga_modal']); ?></td>
+    <td><?php echo ($d['stok']); ?></td>
     <td>Rp.<?php echo ribuan($d['harga_jual']); ?></td>
     <td><?php echo $d['tgl_input']; ?></td>
     <td>
@@ -61,8 +61,8 @@
             <input type="text" name="Edit_Nama_Produk" value="<?php echo $d['nama_produk']; ?>" class="form-control" required>
         </div>
         <div class="form-group">
-            <label class="samll">Harga Modal :</label>
-            <input type="number" placeholder="0" name="Edit_Harga_Modal" value="<?php echo $d['harga_modal']; ?>" class="form-control" required>
+            <label class="samll">Stok :</label>
+            <input type="number" placeholder="0" name="Edit_stok" value="<?php echo $d['stok']; ?>" class="form-control" required>
         </div>
         <div class="form-group">
             <label class="samll">Harga Jual :</label>
@@ -86,15 +86,22 @@ if(isset($_POST['TambahProduk']))
 {
     $kodeproduk = htmlspecialchars($_POST['Tambah_Kode_Produk']);
     $namaproduk = htmlspecialchars($_POST['Tambah_Nama_Produk']);
-    $harga_modal = htmlspecialchars($_POST['Tambah_Harga_Modal']);
+    $stok = htmlspecialchars($_POST['Tambah_stok']);
     $harga_jual = htmlspecialchars($_POST['Tambah_Harga_Jual']);
 
-    $cekkode = mysqli_num_rows(mysqli_query($conn,"SELECT * FROM produk WHERE kode_produk='$kodeproduk'"));
+//     $sql = "INSERT INTO inventory (kode_produk,nama_produk,harga_modal,harga_jual)
+//       values ('$kodeproduk','$namaproduk','$harga_modal','$harga_jual')";
+// mysqli_query($conn, $sql);
+// echo '<script>history.go(-1);</script>';
+    $cekkode = mysqli_num_rows(mysqli_query($conn,"SELECT * FROM inventory WHERE kode_produk='$kodeproduk'"));
+    
     if($cekkode > 0) {
         echo '<script>alert("Maaf! kode produk sudah ada");history.go(-1);</script>';
     } else {
-    $InputProduk = mysqli_query($conn,"INSERT INTO produk (kode_produk,nama_produk,harga_modal,harga_jual)
-     values ('$kodeproduk','$namaproduk','$harga_modal','$harga_jual')");
+      $sql = "INSERT INTO inventory (kode_produk,nama_produk,stok,harga_jual)
+      values ('$kodeproduk','$namaproduk','$stok','$harga_jual')";
+      $InputProduk = mysqli_query($conn, $sql);
+     echo($sql);
     if ($InputProduk){
         echo '<script>history.go(-1);</script>';
     } else {
@@ -106,17 +113,17 @@ if(isset($_POST['SimpanEdit'])){
     $idproduk1 = htmlspecialchars($_POST['idproduk']);
     $kodeproduk1 = htmlspecialchars($_POST['Edit_Kode_Produk']);
     $namaproduk1 = htmlspecialchars($_POST['Edit_Nama_Produk']);
-    $harga_modal1 = htmlspecialchars($_POST['Edit_Harga_Modal']);
+    $stok1 = htmlspecialchars($_POST['Edit_stok']);
     $harga_jual1 = htmlspecialchars($_POST['Edit_Harga_Jual']);
 
-    $CariProduk = mysqli_query($conn,"SELECT * FROM produk WHERE kode_produk='$kodeproduk1' and idproduk!='$idproduk1'");
+    $CariProduk = mysqli_query($conn,"SELECT * FROM inventory WHERE kode_produk='$kodeproduk1' and idproduk!='$idproduk1'");
     $HasilData = mysqli_num_rows($CariProduk);
 
     if($HasilData > 0){
         echo '<script>alert("Maaf! kode produk sudah ada");history.go(-1);</script>';
     } else{
-        $cekDataUpdate =  mysqli_query($conn, "UPDATE produk SET kode_produk='$kodeproduk1',
-        nama_produk='$namaproduk1',harga_modal='$harga_modal1',harga_jual='$harga_jual1'
+        $cekDataUpdate =  mysqli_query($conn, "UPDATE inventory SET kode_produk='$kodeproduk1',
+        nama_produk='$namaproduk1',stok='$stok1',harga_jual='$harga_jual1'
          WHERE idproduk='$idproduk1'") or die(mysqli_connect_error());
         if($cekDataUpdate){
             echo '<script>history.go(-1);</script>';
@@ -127,7 +134,8 @@ if(isset($_POST['SimpanEdit'])){
 }; 
 	if(!empty($_GET['hapus'])){
 		$idproduk1 = $_GET['hapus'];
-		$hapus_data = mysqli_query($conn, "DELETE FROM produk WHERE idproduk='$idproduk1'");
+    echo $idproduk1;
+		$hapus_data = mysqli_query($conn, "DELETE FROM inventory WHERE idproduk='$idproduk1'");
         if($hapus_data){
             echo '<script>history.go(-1);</script>';
         } else {
@@ -139,7 +147,7 @@ if(isset($_POST['SimpanEdit'])){
 <div class="modal fade" id="TambahProduk" tabindex="-1" role="dialog">
   <div class="modal-dialog" role="document">
     <div class="modal-content border-0">
-        <form method="post">
+    <form method="post">
       <div class="modal-header bg-purple">
         <h5 class="modal-title text-white">Tambah Produk</h5>
         <button type="button" class="close text-white" data-dismiss="modal" aria-label="Close">
@@ -149,26 +157,27 @@ if(isset($_POST['SimpanEdit'])){
       <div class="modal-body">
         <div class="form-group">
             <label class="samll">Kode Produk :</label>
-            <input type="text" name="Tambah_Kode_Produk" class="form-control" required>
+            <input type="text" placeholder='' name="Tambah_Kode_Produk" class="form-control" required>
         </div>
         <div class="form-group">
             <label class="samll">Nama Produk :</label>
-            <input type="text" name="Tambah_Nama_Produk" class="form-control" required>
+            <input type="text" placeholder='' name="Tambah_Nama_Produk" class="form-control" required>
         </div>
         <div class="form-group">
-            <label class="samll">Harga Modal :</label>
-            <input type="number" placeholder="0" name="Tambah_Harga_Modal" class="form-control" required>
+            <label class="samll">Stok :</label>
+            <input type="number" placeholder=0 name="Tambah_stok" class="form-control" required>
         </div>
         <div class="form-group">
             <label class="samll">Harga Jual :</label>
-            <input type="number" placeholder="0" name="Tambah_Harga_Jual" class="form-control" required>
+            <input type="number" placeholder=0 name="Tambah_Harga_Jual" class="form-control" required>
         </div>
       </div>
       <div class="modal-footer">
         <button type="button" class="btn btn-secondary" data-dismiss="modal">Batal</button>
-        <button type="submit" name="TambahProduk" class="btn btn-primary">Simpan</button>
+        <button type="submit" onclick="location.reload()" name="TambahProduk" class="btn btn-primary">Simpan</button>
+        
       </div>
-      </form>
+    </form>
     </div>
   </div>
 </div>

@@ -308,7 +308,8 @@ a{
 }
 
 .btn-primary{
-  background: #4c6ef8!important;
+  background: #4c6ef8;
+  color: #fff;
 }
 .btn, .btn:focus, .btn:hover, .btn:active{
   border: none !important;
