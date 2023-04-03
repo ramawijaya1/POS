@@ -15,7 +15,7 @@ session_start();
     if(in_array($ekstensi, $ekstensi_diperbolehkan) === true){
         if($ukuran < 10044070){			
             move_uploaded_file($file_tmp, 'assets/images/'.$nama);
-            $query =  mysqli_query($conn, "UPDATE login SET logo='$nama' WHERE userid='$uid'") or die(mysqli_connect_error());
+            $query =  mysqli_query($conn, "UPDATE kasir SET logo='$nama' WHERE userid='$uid'") or die(mysqli_connect_error());
             if($query){
                 echo '<script>history.go(-1);</script>';
             }else{

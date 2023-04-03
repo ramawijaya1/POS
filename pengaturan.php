@@ -1,20 +1,22 @@
 
 <?php include 'sidebar.php'; ?>
+
 <!-- isinya -->
 <?php
 if(isset($_POST['SimpanEdit'])){
+    
     $uname = htmlspecialchars($_POST['username']);
-    $ntoko = htmlspecialchars($_POST['nama_toko']);
+    $ntoko = htmlspecialchars($_POST['toko']);
     $telp = htmlspecialchars($_POST['telepon']);
     $addr = htmlspecialchars($_POST['alamat']);
     $pass = mysqli_real_escape_string($conn,$_POST['password']);
 
-    $queryuser = mysqli_query($conn,"SELECT * FROM login WHERE userid='$uid'");
+    $queryuser = mysqli_query($conn,"SELECT * FROM kasir WHERE userid='$uid'");
     $cariuser = mysqli_fetch_assoc($queryuser);
 
-    if( password_verify($pass, $cariuser['password']) ) {
+    if( $pass === $cariuser['password'])  {
         if($cariuser){ 
-        $cekDataUpdate =  mysqli_query($conn, "UPDATE login SET username='$uname',
+        $cekDataUpdate =  mysqli_query($conn, "UPDATE kasir SET username='$uname',
         toko='$ntoko',telepon='$telp',alamat='$addr'
          WHERE userid='$uid'") or die(mysqli_connect_error());
         if($cekDataUpdate){
@@ -31,7 +33,7 @@ if(isset($_POST['SimpanEdit'])){
 if(isset($_POST['UpdatePass'])){
     $pass1 = mysqli_real_escape_string($conn,$_POST['pswd1']);
 
-    $querypass = mysqli_query($conn,"SELECT * FROM login WHERE userid='$uid'");
+    $querypass = mysqli_query($conn,"SELECT * FROM kasir WHERE userid='$uid'");
     $caripass = mysqli_fetch_assoc($querypass);
 
     if( password_verify($pass1, $caripass['password']) ) {
@@ -41,7 +43,7 @@ if(isset($_POST['UpdatePass'])){
             $pass3 = password_hash($_POST['pswd3'], PASSWORD_DEFAULT);
 
             if (password_verify($pass2, $pass3)) {
-                $cekPass =  mysqli_query($conn, "UPDATE login SET password='$pass3'
+                $cekPass =  mysqli_query($conn, "UPDATE kasir SET password='$pass3'
                     WHERE userid='$uid'") or die(mysqli_connect_error());
                     if($cekPass){
                         echo '<script>alert("Password Berhasil di update");history.go(-1);</script>';
@@ -70,7 +72,7 @@ if(isset($_POST['UpdatePass'])){
                     </form>
                     <div class="media-body mb-5 text-white">
                         <h4 class="mt-0 mb-0"><?php echo $username ?></h4>
-                        <p class="small mb-4">Administrator</p>
+                        <p class="small mb-4">Kasir</p>
                     </div>
                 </div>
             </div>
@@ -92,7 +94,7 @@ if(isset($_POST['UpdatePass'])){
                     <div class="row">
                         <div class="col-sm-6 col-md-6 mb-2">
                             <label for="namatoko">Nama Toko<span class="text-danger">*</span></label>
-                            <input name="nama_toko" type="text" class="form-control" value="<?php echo $toko ?>" id="namatoko" placeholder="nama toko" required>
+                            <input name="toko" type="text" class="form-control" value="<?php echo $toko ?>" id="namatoko" placeholder="nama toko" required>
                         </div>
                         <div class="col-sm-6 col-md-6 mb-2">
                             <label for="username">Username<span class="text-danger">*</span></label>
@@ -159,7 +161,7 @@ if(isset($_POST['UpdatePass'])){
 
                 </div><!-- End tab -->
             </div>
-        </div><!-- End profile widget
+        </div><!-- End profile widget-->
 
 <!-- end isinya -->
 </div><!-- end container-fluid" -->

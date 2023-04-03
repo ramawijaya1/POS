@@ -2,10 +2,10 @@
 	@ob_start();
 	session_start();
   include 'config.php';
-	// if(!isset($_SESSION['log'])){
-  //   } else {
-  //       header('location:index.php');
-  //   };
+	if(!isset($_SESSION['log'])){
+    } else {
+        header('location:index.php');
+    };
 
     if(isset($_POST['login'])){
       $user = mysqli_real_escape_string($conn,$_POST['username']);
