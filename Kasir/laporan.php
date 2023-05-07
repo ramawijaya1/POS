@@ -8,7 +8,7 @@ $i2 = mysqli_fetch_assoc(mysqli_query($conn,"SELECT SUM(subtotal) as totdpt FROM
 $i3 = mysqli_fetch_assoc(mysqli_query($conn,"SELECT SUM(subtotal-qty*harga_modal) as totdpt1 FROM laporan"));
 $i4 = mysqli_fetch_assoc(mysqli_query($conn,"SELECT SUM(subtotal) as isub FROM laporan"));
 ?>
-    <h1 class="h3 mb-2">Data Laporan</h1>
+    <h1 class="h3 mb-2">Data Invoice</h1>
         <div class="row">
 
             <div class="col-6 col-sm-6 col-md-3 col-lg-3 m-pr-1 m-mb-1">
@@ -57,7 +57,7 @@ $i4 = mysqli_fetch_assoc(mysqli_query($conn,"SELECT SUM(subtotal) as isub FROM l
 <tbody>
 <?php 
     $no = 1;
-    $data_laporan = mysqli_query($conn,"SELECT * FROM invoice WHERE status='selesai' GROUP BY tgl_inv ORDER BY invid DESC");
+    $data_laporan = mysqli_query($conn,"SELECT * FROM invoice WHERE status='selesai' ORDER BY invid DESC");
     while($d = mysqli_fetch_array($data_laporan)){
       $oninv = $d['invoice'];
         ?>
