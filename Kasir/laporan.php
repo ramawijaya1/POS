@@ -101,7 +101,7 @@ $i4 = mysqli_fetch_assoc(mysqli_query($conn,"SELECT SUM(subtotal) as isub FROM l
 if(isset($_POST['Remove'])){
   $nona = $_POST['nona'];
   $hapus_data_Cart_all = mysqli_query($conn, "DELETE FROM laporan WHERE invoice='$nona'");
-    $hapus_data_Cart_all1 = mysqli_query($conn, "DELETE FROM inv WHERE invoice='$nona'");
+    $hapus_data_Cart_all1 = mysqli_query($conn, "DELETE FROM invoice WHERE invoice='$nona'");
     if($hapus_data_Cart_all&&$hapus_data_Cart_all1){
       echo '<script>;window.location="laporan.php"</script>';
   } else {
