@@ -67,7 +67,7 @@ $logo = $DataLogin['logo'];
             <span>General</span>
           </li>
           <li>
-            <a href="laporan.php">
+            <a href="index.php">
               <i class="fa fa-chart-line"></i>
               <span>Laporan</span>
             </a>
