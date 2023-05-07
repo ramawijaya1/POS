@@ -21,7 +21,7 @@ $logo = $DataLogin['logo'];
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>Aplikasi Kasir | by.adgrafika</title>
+    <title>Aplikasi Kasir | by.kelompok5</title>
     <link rel="icon" href="favicon.ico">
     <link rel="icon" href="favicon.ico" type="image/ico">
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">
@@ -81,7 +81,7 @@ $logo = $DataLogin['logo'];
           <li>
             <a href="laporan.php">
               <i class="fa fa-chart-line"></i>
-              <span>Laporan</span>
+              <span>Invoice</span>
             </a>
           </li>
           <li>
