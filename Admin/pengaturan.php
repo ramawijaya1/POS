@@ -72,7 +72,7 @@ if(isset($_POST['UpdatePass'])){
                     </form>
                     <div class="media-body mb-5 text-white">
                         <h4 class="mt-0 mb-0"><?php echo $username ?></h4>
-                        <p class="small mb-4">Kasir</p>
+                        <p class="small mb-4">Admin</p>
                     </div>
                 </div>
             </div>
