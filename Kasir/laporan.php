@@ -1,9 +1,10 @@
 
 <?php include 'sidebar.php'; ?>
+
 <!-- isinya -->
 <?php
 $i1 = mysqli_fetch_assoc(mysqli_query($conn,"SELECT SUM(qty) as totqty FROM laporan"));
-$i2 = mysqli_fetch_assoc(mysqli_query($conn,"SELECT SUM(qty*harga_modal) as totdpt FROM laporan"));
+$i2 = mysqli_fetch_assoc(mysqli_query($conn,"SELECT SUM(subtotal) as totdpt FROM laporan"));
 $i3 = mysqli_fetch_assoc(mysqli_query($conn,"SELECT SUM(subtotal-qty*harga_modal) as totdpt1 FROM laporan"));
 $i4 = mysqli_fetch_assoc(mysqli_query($conn,"SELECT SUM(subtotal) as isub FROM laporan"));
 ?>
@@ -17,12 +18,12 @@ $i4 = mysqli_fetch_assoc(mysqli_query($conn,"SELECT SUM(subtotal) as isub FROM l
                 </div>
             </div>
 
-            <div class="col-6 col-sm-6 col-md-3 col-lg-3 m-pl-1 m-mb-1">
+            <!-- <div class="col-6 col-sm-6 col-md-3 col-lg-3 m-pl-1 m-mb-1">
                 <div class="box-laporan">
                     <p class="small mb-0">Pendapatan</p>
                     <h5 class="mb-0">Rp.<?php echo ribuan($i3['totdpt1']); ?></h5>
                 </div>
-            </div>
+            </div> -->
 
             <div class="col-6 col-sm-6 col-md-3 col-lg-3 m-pr-1">
                 <div class="box-laporan">
@@ -56,7 +57,7 @@ $i4 = mysqli_fetch_assoc(mysqli_query($conn,"SELECT SUM(subtotal) as isub FROM l
 <tbody>
 <?php 
     $no = 1;
-    $data_laporan = mysqli_query($conn,"SELECT * FROM invoice WHERE status='selesai' ORDER BY invid ASC");
+    $data_laporan = mysqli_query($conn,"SELECT * FROM invoice WHERE status='selesai' GROUP BY tgl_inv ORDER BY invid DESC");
     while($d = mysqli_fetch_array($data_laporan)){
       $oninv = $d['invoice'];
         ?>
