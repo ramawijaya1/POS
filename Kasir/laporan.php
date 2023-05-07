@@ -25,12 +25,12 @@ $i4 = mysqli_fetch_assoc(mysqli_query($conn,"SELECT SUM(subtotal) as isub FROM l
                 </div>
             </div> -->
 
-            <div class="col-6 col-sm-6 col-md-3 col-lg-3 m-pr-1">
+            <!-- <div class="col-6 col-sm-6 col-md-3 col-lg-3 m-pr-1">
                 <div class="box-laporan">
                     <p class="small mb-0">Penjualan</p>
                     <h5 class="mb-0">Rp.<?php echo ribuan($i2['totdpt']); ?></h5>
                 </div>
-            </div>
+            </div> -->
 
             <div class="col-6 col-sm-6 col-md-3 col-lg-3 m-pl-1">
                 <div class="box-laporan">

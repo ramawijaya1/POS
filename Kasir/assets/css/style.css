@@ -384,8 +384,9 @@ a{
     color: #ffffff;
 }
 .box-laporan{
+  
   padding: 0.7rem;
-  background: #4c6ef8;
+  background: #012201;
   border-radius:0.2rem;
 }
 .box-laporan p{
@@ -406,7 +407,7 @@ img.img-cover-profile{
 }
 span.icon-qr{
   top: 5px;
-  right: 10px;
+  right: 13px;
   background: #ffffff !important;
   
 }

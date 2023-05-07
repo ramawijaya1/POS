@@ -22,7 +22,7 @@ $jsArray2 = "var harga_modal = new Array();";
             $jsArray2 .= "harga_modal['" . $row_brg['kode_produk'] . "'] = {harga_modal:'" . addslashes($row_brg['harga_modal']) . "'};"; } ?>
         <?php } ?>
     </datalist>
-    <span class="position-absolute icon-qr" >ID </span>
+    <span class="position-absolute icon-qr" ><i class="fa fa-angle-down"></i> </span>
     </div>
   </div>
   <div class="col-sm-4 col-md-4 col-lg-3 mb-3">
@@ -60,6 +60,7 @@ if(isset($_POST['InputCart']))
     $Input3 = htmlspecialchars($_POST['Charga']);
     $Input5 = htmlspecialchars($_POST['Csubs']);
     $hrg_m = htmlspecialchars($_POST['harga_modal']);
+    
 
     $cekDulu = mysqli_query($conn,"SELECT * FROM penjualan ");
     $liat = mysqli_num_rows($cekDulu);
@@ -80,6 +81,7 @@ if(isset($_POST['InputCart']))
         $baru1 = $jmlh1 * $baru;
 
         $updateaja = mysqli_query($conn,"UPDATE penjualan SET qty='$baru', subtotal='$baru1' WHERE invoice='$inv_c' and kode_produk='$Input1'");
+        $upstok= mysqli_query($conn, "UPDATE penjualan SET qty='$sisa' WHERE id='$id_brg'");
         if($updateaja){
            echo '<script>window.location="index.php"</script>';
         } else {
@@ -234,6 +236,9 @@ if(isset($_POST['import']))
 {
     $Ipembayaran = htmlspecialchars($_POST['pembayaran']);
     $Ikembalian = htmlspecialchars($_POST['kembalian']);
+    $IStok = ($_POST['stok']);
+    $Iqty = ($_POST['qty']);
+    $id_prdk=$_POST['idproduk'];
 
     $UpdCart = mysqli_query($conn,"UPDATE invoice SET
       pembayaran='$Ipembayaran',kembalian='$Ikembalian',status='selesai' WHERE invoice='$noinv'") 
@@ -241,7 +246,7 @@ if(isset($_POST['import']))
 
      $UpdLap = mysqli_query($conn, "INSERT INTO laporan (invoice,kode_produk,nama_produk,harga,harga_modal,qty,subtotal)
      SELECT invoice,kode_produk,nama_produk,harga,harga_modal,qty,subtotal FROM penjualan") or die (mysqli_connect_error());
-
+    
     $DelCart = mysqli_query($conn,"DELETE FROM penjualan") or die (mysqli_connect_error());
     
     if($UpdCart&&$UpdLap&&$DelCart){
