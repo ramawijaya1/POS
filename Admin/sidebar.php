@@ -21,7 +21,7 @@ $logo = $DataLogin['logo'];
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>Aplikasi Kasir | by.adgrafika</title>
+    <title>Aplikasi Kasir | by.kelompok5</title>
     <link rel="icon" href="favicon.ico">
     <link rel="icon" href="favicon.ico" type="image/ico">
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">
@@ -89,7 +89,7 @@ $logo = $DataLogin['logo'];
       <!-- sidebar-menu  -->
     </div>
     <div class="sidebar-footer">
-    © 2022 Developed by - <a target="_blank" rel="noopener noreferrer" href="https://adgrafika.my.id">
+    © 2023 Developed by - <a target="_blank" rel="noopener noreferrer" href="https://adgrafika.my.id">
      Kelompok 5</a>
     </div>
   </nav>
