@@ -101,7 +101,7 @@ $logo = $DataLogin['logo'];
       <!-- sidebar-menu  -->
     </div>
     <div class="sidebar-footer">
-    © 2022 Developed by - <a target="_blank" rel="noopener noreferrer" href="https://adgrafika.my.id">
+    © 2023 Developed by - <a target="_blank" rel="noopener noreferrer" href="https://adgrafika.my.id">
      Kelompok 5</a>
     </div>
   </nav>
