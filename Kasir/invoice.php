@@ -134,6 +134,6 @@ $i4 = mysqli_fetch_assoc(mysqli_query($conn,"SELECT SUM(subtotal) as isub FROM l
 </div><!-- end box print -->
 </section>
 <!-- end data print -->
-
+            <script>window.print()</script>
 <!-- end isinya -->
 <?php include 'footer.php'; ?>

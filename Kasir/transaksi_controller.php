@@ -1,5 +1,4 @@
 <?php
-
 include_once './config.php';
 
 if (isset($_POST['import'])) {
@@ -16,12 +15,14 @@ if (isset($_POST['import'])) {
         $sisa = (int) $data_produk['stok'] - (int) $d['qty'];
         mysqli_query($conn, "UPDATE inventory SET stok = $sisa WHERE kode_produk = '$idproduk'");
     }
+    session_start();
 
+    $userid = $_SESSION['userid'];
     $UpdLap = mysqli_query($conn, "INSERT INTO laporan (invoice,kode_produk,nama_produk,harga,harga_modal,qty,subtotal)
        SELECT invoice,kode_produk,nama_produk,harga,harga_modal,qty,subtotal FROM penjualan") or die(mysqli_connect_error());
 
     $UpdCart = mysqli_query($conn, "UPDATE invoice SET
-        pembayaran='$Ipembayaran',kembalian='$Ikembalian',status='selesai' WHERE invoice='$noinv'")
+        userid='$userid',pembayaran='$Ipembayaran',kembalian='$Ikembalian',status='selesai' WHERE invoice='$noinv'")
         or die(mysqli_connect_error());
 
     $DelCart = mysqli_query($conn, "DELETE FROM penjualan") or die(mysqli_connect_error());
