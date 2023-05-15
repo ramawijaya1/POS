@@ -1,1 +1,1 @@
-<script>window.location = "./Admin/login.php"</script>
+<script>window.location = "./Kasir/login.php"</script>
