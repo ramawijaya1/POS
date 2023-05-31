@@ -91,6 +91,7 @@ body {
 
     <form class="form-signin" method="POST">
       <img class="mb-4" src="assets/images/firda.png" alt="" width="150" height="72">
+      <br><p style="text-align:left"><a href="../Admin/login.php" style="color:white">Login Sebagai Admin</a></p>
       <div class="form-group mb-2">
         <label for="inputuser" class="sr-only">Username</label>
         <input type="text" id="inputuser" name="username" class="form-control" placeholder="Username" required autofocus>
